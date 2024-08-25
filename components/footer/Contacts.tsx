@@ -11,7 +11,7 @@ export default function FooterContacts() {
 				<span className='icon'>
 					<FontAwesomeIcon icon={faWhatsapp}/>
 				</span>
-				<a className='link' href='https://wa.me/923212897737' target='_blank'>+92 321 2897737</a>
+				<a className='link' href='https://wa.me/923128788038' target='_blank'>+92 312 8788038</a>
 				</p>
 			<p className='page-footer__icon-w-link'>
 				<span className='icon'>
