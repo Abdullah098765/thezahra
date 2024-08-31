@@ -26,9 +26,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<Provider store={store}>
 			<Head>
-				<title>Vistagleam - Your Shopping Destination</title>
-				<meta property="og:title" content="Vistagleam - Your Shopping Destination" key="title" />
-				<meta name="description" content="Welcome to Vistagleam! Explore a wide range of high-quality clothing, jewelry, makeup, and more. Your go-to destination for style and value." />
+				<title>The Zahra - Your Shopping Destination</title>
+				<meta property="og:title" content="The Zahra - Your Shopping Destination" key="title" />
+				<meta name="description" content="Welcome to The Zahra! Explore a wide range of high-quality clothing, jewelry, makeup, and more. Your go-to destination for style and value." />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<RouterListener />

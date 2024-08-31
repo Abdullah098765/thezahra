@@ -20,7 +20,7 @@ const shopBaseUrl = process.env.BOUNDLESS_BASE_URL || '';
 
 export default function MainLayout({children, title, metaData, mainMenu, footerMenu, noIndex, basicSettings}: IMainLayoutProps) {
 	const dispatch = useDispatch();
-	const desc = "Welcome to Vistagleam! Explore a wide range of high-quality clothing, jewelry, makeup, and more. Your go-to destination for style and value."
+	const desc = "Welcome to The Zahra! Explore a wide range of high-quality clothing, jewelry, makeup, and more. Your go-to destination for style and value."
 	const {canonicalUrl, imgUrl, description= desc } = metaData || {};
 	const asideIsOpened = useAppSelector((state: RootState) => state.asideMenu.isOpened);
 
@@ -47,12 +47,12 @@ export default function MainLayout({children, title, metaData, mainMenu, footerM
 				<meta name='theme-color' content='#ffffff' />
 
 				<meta property='og:type' content='website' />
-				<meta property='og:title' content={title || 'Vistagleam - Your Shopping Destination'} />
+				<meta property='og:title' content={title || 'The Zahra - Your Shopping Destination'} />
 				<meta property='og:url' content={canonicalUrl || shopBaseUrl} />
 				<meta property='og:image' content={imgUrl || (shopBaseUrl + '/og.jpeg')} />
 				{description && <meta property='og:description' content={description} />}
 
-				<title>{title || 'Vistagleam - Your Shopping Destination'}</title>
+				<title>{title || 'The Zahra - Your Shopping Destination'}</title>
 
 				<link rel='preconnect' href={process.env.BOUNDLESS_API_BASE_URL || 'https://api.boundless-commerce.com'} crossOrigin={'use-credentials'} />
 				{noIndex && <meta name='robots' content='noindex' />}

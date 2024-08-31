@@ -2,7 +2,7 @@ import Link from 'next/link';
 import logoImg from '../../assets/logo.svg';
 
 export default function FooterAbout({ companyTitle }: { companyTitle?: string }) {
-    const title = companyTitle || 'Vistagleam Store';
+    const title = companyTitle || 'The Zahra Store';
     return <>
         <div className='page-footer__logo'>
             <Link href='/'>
@@ -14,7 +14,7 @@ export default function FooterAbout({ companyTitle }: { companyTitle?: string })
         </div>
         <div className='page-footer__disclaimer'>
             <p className='text-muted small'>
-                Welcome to Vistagleam! Explore a wide range of high-quality clothing, jewelry, makeup,
+                Welcome to The Zahra! Explore a wide range of high-quality clothing, jewelry, makeup,
                 and more. Our commitment is to bring you the best in style and value. Shop with confidence
                 and let us add a gleam to your shopping experience.
             </p>

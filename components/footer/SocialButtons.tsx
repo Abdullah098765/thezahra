@@ -15,7 +15,7 @@ export default function SocialButtons() {
 				</div>
 				
 			</div>
-			<p className='text-muted'>All rights reserved. © Vistagleam-Commerce</p>
+			<p className='text-muted'>All rights reserved. © The Zahra-Commerce</p>
 		</>
 	);
 }
