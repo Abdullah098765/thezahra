@@ -89,7 +89,6 @@ function ListElement({item, position, open}: {item: IMenuItem, position?: number
 							{active: item.isActive}
 					)}
 					{...(isRootElem ? rootProps : {})}>
-
 					<span>
 							{image && <span className='img-link'>{imageElem}</span>}
 							<span {...(isRootElem ? {itemProp: 'name'} : {})}>
@@ -100,7 +99,7 @@ function ListElement({item, position, open}: {item: IMenuItem, position?: number
 			</Link>
 			{isRootElem && <meta itemProp='position' content={String(position + 1)} />}
 			{!isRootElem && hasChildren && <ChildList children={item.children!} />}
-    </>;
+	</>;
 
 	return (
 		<>

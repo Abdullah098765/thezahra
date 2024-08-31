@@ -1,7 +1,7 @@
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons/faWhatsapp';
-import {faClock} from '@fortawesome/free-solid-svg-icons/faClock';
-import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons/faMapMarkerAlt';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons/faWhatsapp';
+import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons/faMapMarkerAlt';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function FooterContacts() {
 	return (
@@ -9,21 +9,21 @@ export default function FooterContacts() {
 			<h3 className='page-footer__header'>Contact Us</h3>
 			<p className='page-footer__icon-w-link'>
 				<span className='icon'>
-					<FontAwesomeIcon icon={faWhatsapp}/>
+					<FontAwesomeIcon icon={faWhatsapp} />
 				</span>
-				<a className='link' href='https://wa.me/923128788038' target='_blank'>+92 312 8788038</a>
-				</p>
-			<p className='page-footer__icon-w-link'>
-				<span className='icon'>
-					<FontAwesomeIcon icon={faMapMarkerAlt}/>
-				</span>
-				<a className='link' href='#'>Nazimabad, Karachi, Pakistan</a>
+				<a className='link' href='tel:+92 309 2793477'>+92 309 2793477</a>
 			</p>
 			<p className='page-footer__icon-w-link'>
 				<span className='icon'>
-					<FontAwesomeIcon icon={faClock}/>
+					<FontAwesomeIcon icon={faMapMarkerAlt} />
 				</span>
-				9:00am &mdash; 10:00pm
+				<span className='link' >Nazimabad, Karachi, Pakistan</span>
+			</p>
+			<p className='page-footer__icon-w-link'>
+				<span className='icon'>
+					<FontAwesomeIcon icon={faClock} />
+				</span>
+				9:00am &mdash; 6:00pm
 			</p>
 		</>
 	);

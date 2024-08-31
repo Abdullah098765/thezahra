@@ -1,59 +1,45 @@
-$products-gutter: 20px !default;
+$products-gutter: 10px !default;
 
 .products {
 	align-items: stretch;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
-	margin: 0;
+	gap: $products-gutter;
+	
+	// margin: 15px var(--bs-gutter-x, -0.75rem);
 	padding: 0;
-
-	@include media-breakpoint-up(sm) {
-		gap: $products-gutter;
-	}
 
 	&__item {
 		background: #fff;
-		border: 3px solid $front-products-border-color;
-		border-radius: 0;
+		border: 1px solid $front-products-border-color;
+		border-radius: 5px;
 		flex-shrink: 0;
+		// margin: $products-gutter;
 		padding: 10px;
 		position: relative;
 		transition: all ease-in-out 0.35s;
 
-		width: calc((100% - (1 * 10px)) / 2);
+		width: calc((100% - (4 * #{$products-gutter})) / 2);
 
-		@include media-breakpoint-up(sm) {
-			width: calc((100% - (1 * #{$products-gutter})) / 2);
+		@include media-breakpoint-up(lg) {
+			width: calc((100% - (6 * #{$products-gutter})) / 3);
 		}
 
-		&_4-in-row {
-			@include media-breakpoint-up(md) {
-				width: calc((100% - (2 * #{$products-gutter})) / 3);
-			}
-
-			@include media-breakpoint-up(lg) {
-				width: calc((100% - (3 * #{$products-gutter})) / 4);
-			}
-		}
-
-		&_3-in-row {
-			@include media-breakpoint-up(md) {
-				width: calc((100% - (2 * #{$products-gutter})) / 3);
-			}
+		@include media-breakpoint-up(xl) {
+			width: calc((100% - (8 * #{$products-gutter})) / 4);
 		}
 
 		&:hover {
-			border-color: $theme-color;
-			//box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+			border-color: transparent;
+			box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
 
-			//.products__image {
-			//	.img {
-			//		img {
-			//			transform: scale(1.1);
-			//		}
-			//	}
-			//}
+			.products__image {
+				.img {
+					img {
+						transform: scale(1.1);
+					}
+				}
+			}
 		}
 	}
 
@@ -67,12 +53,13 @@ $products-gutter: 20px !default;
 	}
 
 	&__title {
+
 		flex-grow: 2;
 		font-size: 0.9rem;
 
-		margin: 30px 0 15px;
+		margin: 15px 0 15px;
 		@include media-breakpoint-up(sm) {
-			font-size: 1.1rem;
+			font-size: 1rem;
 		}
 
 		a {
@@ -94,57 +81,23 @@ $products-gutter: 20px !default;
 				height: auto;
 				transition: all ease-in-out 0.35s;
 				width: 100%;
+				border-radius: 5px;
 			}
 		}
-	}
-
-	&__offer-row {
-		align-items: center;
-		display: flex;
-		gap: 10px;
 	}
 
 	&__offer {
-		flex-grow: 1;
-		margin: 0;
+		margin: 0 0 15px;
 	}
 
 	&__to-cart {
-		&_in-stock {
-			flex-shrink: 0;
-		}
-
-		//align-items: center;
-		//display: flex;
-		//justify-content: center;
-		//min-height: 38px;
-
-		&_out-stock {
-			@include media-breakpoint-up(lg) {
-				flex-shrink: 0;
-				line-height: 50px;
-			}
-		}
-	}
-
-	&__to-cart-btn {
-		border-radius: 0;
-		//@include button-variant($btn-action-bg, $btn-action-bg, $btn-action-color);
-		//background: $btn-action-bg;
-		//border: 0;
-		//color: $btn-action-color;
-		display: block;
-		height: 50px;
-		padding: 6px 12px;
-		width: 50px;
-		//&:hover {
-		//	background-color: darken($btn-action-bg, 10%);
-		//}
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		min-height: 38px;
 	}
 
 	&__price {
-		text-align: left;
-
 		.from {
 			color: $text-muted;
 			display: inline-block;
@@ -153,24 +106,26 @@ $products-gutter: 20px !default;
 		}
 
 		.old {
+
 			color: $text-muted;
 			display: inline-block;
-			font-size: 1rem;
+			font-size: 0.85rem;
 			margin: 0 5px;
 
-			@include media-breakpoint-up(xl) {
-				font-size: 1.1rem;
+			@include media-breakpoint-up(sm) {
+				font-size: .85rem;
 			}
 		}
 
 		.current {
+
 			display: inline-block;
-			font-size: 1rem;
+			font-size: 0.85rem;
 			font-weight: $front-font-weight-bold;
 			margin: 0 5px;
 
-			@include media-breakpoint-up(xl) {
-				font-size: 1.1rem;
+			@include media-breakpoint-up(sm) {
+				font-size: .9rem;
 			}
 
 			&.has-old {
@@ -186,7 +141,7 @@ $products-gutter: 20px !default;
 	}
 
 	.product__label {
-		border-radius: 0;
+		border-radius: 4px;
 		margin: 0 0 6px;
 
 		&:last-child {

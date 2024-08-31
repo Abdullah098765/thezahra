@@ -37,8 +37,8 @@ export default function CoverTextInCenter({img, imgPortrait, shadow, content, li
 								href={link}
 								className='cover-text-center__content-container container'
 								{...linkProps}>
-							<CoverContent {...content} />
-						</Link>
+								<CoverContent {...content} />
+							</Link>
 						: <div className='cover-text-center__content-container container'>
 							<CoverContent {...content} />
 						</div>}
@@ -52,7 +52,7 @@ export default function CoverTextInCenter({img, imgPortrait, shadow, content, li
 				</a>}
 			</div>
 		</div>
-	);
+    );
 }
 
 function CoverContent({intro, head, subHead}: ICoverTextContent) {

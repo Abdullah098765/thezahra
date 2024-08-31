@@ -1,11 +1,11 @@
-import {IFinalPrice} from 'boundless-api-client';
+import { IFinalPrice } from 'boundless-api-client';
 import clsx from 'clsx';
-import {getPriceForTpl} from '../../lib/product';
+import { getPriceForTpl } from '../../lib/product';
 import useFormatCurrency from '../../hooks/useFormatCurrency';
 
-export default function ProductPrice({price, className = 'products__price'}: {price: IFinalPrice, className?: string}) {
+export default function ProductPrice({ price, className = 'products__price' }: { price: IFinalPrice, className?: string }) {
 	const tplPrice = getPriceForTpl(price);
-	const {formatCurrency} = useFormatCurrency();
+	const { formatCurrency } = useFormatCurrency();
 
 	if (tplPrice.price === null)
 		return null;
@@ -13,10 +13,10 @@ export default function ProductPrice({price, className = 'products__price'}: {pr
 	return (
 		<div className={className}>
 			{tplPrice.isFrom && <span className={'from'}>From:</span>}
-			{tplPrice.oldPrice && <s className={'old'}>{formatCurrency(tplPrice.oldPrice)}</s>}
-			<span className={clsx('current', {'has-old': tplPrice.oldPrice})}>
+			<span className={clsx('current', { 'has-old': tplPrice.oldPrice })}>
 				{formatCurrency(tplPrice.price)}
 			</span>
+			{tplPrice.oldPrice && <s className={'old'}>{formatCurrency(tplPrice.oldPrice)}</s>}
 		</div>
 	);
 }

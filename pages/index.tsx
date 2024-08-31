@@ -4,57 +4,63 @@ import ProductsList from '../components/ProductsList';
 import MainLayout from '../layouts/Main';
 import {apiClient} from '../lib/api';
 import {makeAllMenus} from '../lib/menu';
-// import VerticalMenu from '../components/VerticalMenu';
+import VerticalMenu from '../components/VerticalMenu';
 import {IMenuItem} from '../@types/components';
 import SwiperSlider from '../components/SwiperSlider';
-import thezahrhero from '../assets/thezahrhero.jpeg';
-import sliderimage1 from '../assets/sliderimage1.jpeg';
-import sliderimage2 from '../assets/sliderimage2.jpeg';
-import sliderimage3 from '../assets/sliderimage3.jpeg';
-import sliderimage4 from '../assets/sliderimage4.jpeg';
-// import CoverTextInCenter from '../components/CoverTextInCenter';
-// import bgImg from '../assets/cover-bg.jpeg';
-// import bgPortraitImg from '../assets/cover-bg-portrait.jpg';
+import cliffImg from '../assets/cliff_1.jpg';
+import cliff2Img from '../assets/cliff_2.jpg';
+import CoverTextInCenter from '../components/CoverTextInCenter';
+import bgImg from '../assets/cover-bg.jpeg';
+import bgPortraitImg from '../assets/cover-bg-portrait.jpg';
 import ProductsSliderByQuery from '../components/ProductsSliderByQuery';
-import TextWithIcons from '../components/TextWithIcons';
-import {faBug} from '@fortawesome/free-solid-svg-icons/faBug';
-import {faShieldAlt} from '@fortawesome/free-solid-svg-icons/faShieldAlt';
-import {faSmile} from '@fortawesome/free-solid-svg-icons/faSmile';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import Reviews from '../components/Reviews';
 import {IBasicSettings} from '../@types/settings';
-
-import reviewWoman1 from '../assets/review-woman-1.jpg';
-import reviewMan1 from '../assets/review-man-1.jpg';
-import reviewMan2 from '../assets/review-man-2.jpg';
 
 export default function IndexPage({products, mainMenu, footerMenu, basicSettings}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	return (
 		<MainLayout mainMenu={mainMenu} footerMenu={footerMenu} basicSettings={basicSettings}>
-			<div className='container-xxl'>
-				<MainPageSlider />
-				<h1 className='page-heading page-heading_h1  page-heading_m-h1'>The Zahra Store</h1>
-				<ProductsList
-					products={products}
-					className={'page-block'}
-					itemClassName={'products__item_4-in-row'}
-				/>
+			<div className='container'>
+ 				<div className='row'>
+					<nav className='col-lg-3 d-none d-lg-block'>
+						{mainMenu && <VerticalMenu menuList={mainMenu} />}
+					</nav>
+					<div className='col-lg-9 col-md-12'>
+						<h5 className='page-heading_h5  page-heading_m-h5'>Featured Products</h5>
+						<ProductsList products={products} query={{}}/>
+					</div>
+				</div>
+				<div className='container'>
+					{/* <h2 className='page-heading page-heading_h1  page-heading_m-h1'>Cover example:</h2> */}
+				</div>
 			</div>
-		
-			<div className='container-xxl'>
+			{/* <CoverTextInCenter
+				showChevronDown
+				img={bgImg.src}
+				imgPortrait={bgPortraitImg.src}
+				content={{
+					intro: 'Intro',
+					head: 'Main header',
+					subHead: 'subheader'
+				}}
+				shadow={{
+					opacity: 0.5,
+					backgroundColor: '#000'
+				}}
+				link={'http://google.com'}
+			/> */}
+			<div className='container'>
+				{/* <h2 className='page-heading page-heading_h1  page-heading_m-h1'>Products carousel:</h2> */}
 				<ProductsSliderByQuery
 					query={{collection: ['main-page'], sort: 'in_collection'}}
-					title={'Special offers:'}
+					title={'Featured Collections'}
 					wrapperClassName='page-block'
 				/>
-			
 			</div>
 		</MainLayout>
 	);
 }
 
 export const getServerSideProps: GetServerSideProps<IIndexPageProps> = async () => {
-	const categoryTree = await apiClient.catalog.getCategoryTree({menu: 'category'});
+	const categoryTree = await apiClient?.catalog?.getCategoryTree({menu: 'category'});
 	const {products} = await apiClient.catalog.getProducts({collection: ['main-page'], sort: 'in_collection'});
 	const basicSettings = await apiClient.system.fetchSettings(['system.locale', 'system.currency']) as IBasicSettings;
 
@@ -76,60 +82,33 @@ interface IIndexPageProps {
 	basicSettings: IBasicSettings;
 }
 
-function 	MainPageSlider() {
+function MainPageSlider() {
 	const slides = [
-	
 		{
-			'img': sliderimage1.src,
+			'img': cliffImg.src,
 			'link': '',
-			'caption': '',
-			'captionPosition': 'bottom',
+			'caption': 'Three things cannot be long hidden: The Sun, The Moon, and The Truth.',
+			'captionPosition': 'center',
+			'useFilling': true,
+			'fillingColor': '#000000',
+			'fillingOpacity': 0.40
+		},
+		{
+			'img': cliff2Img.src,
+			'link': '',
+			'caption': 'Pray not for easy lives, pray to be stronger men.',
+			'captionPosition': null,
 			'useFilling': true,
 			'fillingColor': '#000000',
 			'fillingOpacity': 0.4
-		},
-		{
-			'img': sliderimage2.src,
-			'link': '',
-			'caption': '',
-			'captionPosition': 'bottom',
-			'useFilling': true,
-			'fillingColor': '#000000',
-			'fillingOpacity': 0.4
-		},
-		{
-			'img': sliderimage3.src,
-			'link': '',
-			'caption': '',
-			'captionPosition': 'bottom',
-			'useFilling': true,
-			'fillingColor': '#000000',
-			'fillingOpacity': 0.4
-		},
-		{
-			'img': sliderimage4.src,
-			'link': '',
-			'caption': '',
-			'captionPosition': 'bottom',
-			'useFilling': true,
-			'fillingColor': '#000000',
-			'fillingOpacity': 0.4
-		},
-		{
-			'img': thezahrhero.src,
-			'link': '',
-			'caption': '',
-			'captionPosition': 'bottom',
-			'useFilling': false,
-			'fillingColor': '#000000',
-			'fillingOpacity': 0
-		},
+		}
 	];
 
 	return (
 		<SwiperSlider
 			showPrevNext
-			// pagination='progressbar'
+			roundCorners
+			pagination='progressbar'
 			size={'large'}
 			slides={slides}
 			className={'mb-4'}

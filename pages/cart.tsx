@@ -53,7 +53,7 @@ export default function CartPage({mainMenu, footerMenu, basicSettings}: ICartPag
 				</div>
 			</div>
 		</MainLayout >
-	);
+    );
 }
 
 export const getServerSideProps: GetServerSideProps<ICartPageProps> = async () => {

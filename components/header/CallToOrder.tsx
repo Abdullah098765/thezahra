@@ -69,11 +69,11 @@ export default function CallToOrder() {
 					}
 					<div className='text-end'>
 						<Link href='/cart' className='btn btn-action btn-anim'>
-							<FontAwesomeIcon icon={faCheck} /> Place an order
+							<FontAwesomeIcon icon={faCheck} />Place an order
 						</Link>
 					</div>
 				</div>
 			</div>
 		</div>
-	);
+    );
 }

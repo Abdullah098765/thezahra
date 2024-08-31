@@ -86,13 +86,7 @@ export default function CategoryPage({data}: InferGetServerSidePropsType<typeof 
 
 						{collection && <>
 							<CategoryControls params={productsQuery} onSort={onCollectionChange} onMobileShow={() => setShowModal(true)}/>
-							<ProductsList
-								products={collection.products}
-								query={productsQuery}
-								categoryId={category.category_id}
-								className={'products_in-category mt-2 mb-4'}
-								itemClassName={'products__item_3-in-row'}
-							/>
+							<ProductsList products={collection.products} query={productsQuery} categoryId={category.category_id} />
 							<Pagination pagination={collection.pagination} params={productsQuery} onChange={onCollectionChange} />
 						</>}
 						{category.text?.description_bottom && <div dangerouslySetInnerHTML={{__html: category.text.description_bottom}} />}
@@ -105,8 +99,7 @@ export default function CategoryPage({data}: InferGetServerSidePropsType<typeof 
 			>
 				<CategorySidebar category={category} />
 				{(category.filter && Array.isArray(category.filter?.fields) && category.filter.fields.length > 0) &&
-				<FilterForm
-					filterFields={category.filter.fields}
+				<FilterForm filterFields={category.filter!.fields}
 					queryParams={productsQuery}
 					categoryId={category.category_id}
 					onSearch={onCollectionChange}

@@ -22,7 +22,9 @@ export default function CartRow({item, rmItem, onQtyChange}: ICartRowProps) {
 	return (
 		<div className='cart-item row'>
 			<div className='cart-item__description-col col-md-4'>
-				<Link href={productUrl} className='cart-item__img-link'>{imgElement}</Link>
+				<Link href={productUrl} className='cart-item__img-link'>
+					{imgElement}
+				</Link>
 				<div className='cart-item__title'>
 					<div>
 						<Link href={productUrl} legacyBehavior>
@@ -75,7 +77,7 @@ export default function CartRow({item, rmItem, onQtyChange}: ICartRowProps) {
 				</button>
 			</div>
 		</div >
-	);
+    );
 }
 
 interface ICartRowProps {

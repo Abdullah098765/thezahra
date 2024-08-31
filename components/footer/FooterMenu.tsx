@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import {IMenuItem} from '../../@types/components';
 
-export default function FooterMenu({menuList}: { menuList: IMenuItem[] }) {
+export default function FooterMenu({menuList}: {menuList: IMenuItem[]}) {
 	return (
 		<>
 			<h3 className='page-footer__header'>Most popular</h3>
@@ -15,7 +15,7 @@ export default function FooterMenu({menuList}: { menuList: IMenuItem[] }) {
 						key={item.title + i}
 					>
 						<div itemProp='itemListElement' itemScope itemType='//schema.org/ListItem'>
-							<ListElement item={item} position={i}/>
+							<ListElement item={item} position={i} />
 						</div>
 					</li>
 				))}
@@ -24,19 +24,19 @@ export default function FooterMenu({menuList}: { menuList: IMenuItem[] }) {
 	);
 }
 
-function ListElement({item, position}: { item: IMenuItem, position: number }) {
+function ListElement({item, position}: {item: IMenuItem, position: number}) {
 	if (item.url) return <>
-			<Link
+        <Link
 					href={item.url}
 					className={clsx(
 							'page-footer-menu__element is-link',
 							{active: item.isActive}
 					)}>
 					<span className='title' itemProp='name'>
-							{item.title}
+						{item.title}
 					</span>
-			</Link>
-			<meta itemProp='position' content={String(position + 1)}/>
+        </Link>
+        <meta itemProp='position' content={String(position + 1)} />
     </>;
 
 	return (

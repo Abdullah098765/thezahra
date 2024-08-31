@@ -12,7 +12,7 @@ export default function BreadCrumbs({items}: {items: IBreadCrumbItem[]}) {
 	};
 
 	return (
-		<nav className={clsx('breadcrumb-wrapper', isEmpty && 'd-none')}>
+        <nav className={clsx('breadcrumb-wrapper', isEmpty && 'd-none')}>
 			{!isEmpty && <ol className='breadcrumb' itemProp='breadcrumb' itemScope itemType='//schema.org/BreadcrumbList'>
 				<li className='breadcrumb-item' {...richItemAttrs}>
 					<Link href='/' itemProp='item'>
@@ -44,5 +44,5 @@ export default function BreadCrumbs({items}: {items: IBreadCrumbItem[]}) {
 					</li>))}
 			</ol>}
 		</nav>
-	);
+    );
 }

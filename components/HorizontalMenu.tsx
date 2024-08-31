@@ -45,31 +45,23 @@ export default class HorizontalMenu extends React.Component<HorizontalMenuProps,
 
 		return (
 			<nav className='horizontal-menu'>
-				<div className='container-xxl'>
+				<div className='container'>
 					<ul className='horizontal-menu__list list-unstyled' itemScope itemType='//schema.org/ItemList'>
 						{menuList.map((item, i) => {
 							const hasChildren = item.children && item.children.length > 0;
-							const childrenAreVisible = (hasChildren && visiblePopup === i) ? true : false;
-
 							return (
 								<li
 									className={clsx('horizontal-menu__root-element', {
 										active: item.isActive,
 										'has-children': hasChildren,
-										'open': hasChildren && item.isActive,
-										'children-visible': childrenAreVisible
+										'open': hasChildren && item.isActive
 									})}
 									key={item.title + i}
 									onMouseOver={this.handleShow.bind(this, i)}
 									onMouseOut={this.handleHide.bind(this, i)}
 								>
 									<div itemProp='itemListElement' itemScope itemType='//schema.org/ListItem'>
-										<ListElement
-											item={item}
-											position={i}
-											hasChildren={hasChildren}
-											className={clsx({'children-visible': childrenAreVisible})}
-										/>
+										<ListElement item={item} position={i} hasChildren={hasChildren} />
 									</div>
 									{item.children && item.children.length > 0 &&
 										<CSSTransition
@@ -108,7 +100,7 @@ interface HorizontalMenuState {
 	visiblePopup: number | null;
 }
 
-function ListElement({item, position, hasChildren, className}: {item: IMenuItem, position?: number, hasChildren?: boolean, className?: string}) {
+function ListElement({item, position, hasChildren}: {item: IMenuItem, position?: number, hasChildren?: boolean}) {
 	const image = item.img || null;
 	const isRootElem = position !== undefined;
 
@@ -129,28 +121,28 @@ function ListElement({item, position, hasChildren, className}: {item: IMenuItem,
 		: item.title;
 
 	if (item.url && (!item.isActive || isRootElem)) return <>
-		<Link
-				href={item.url}
-				className={clsx(
-						'horizontal-menu__element is-link',
-						isRootElem ? 'is-root' : 'is-child',
-						{active: item.isActive},
-						className
-				)}>
-				{image && <span className='img-link'>{imageElem}</span>}
-				<span className='title' {...(isRootElem ? {itemProp: 'name'} : {})}>
-						{isRootElem ? titleWithIcon : item.title}
-				</span>
-		</Link>
-		{isRootElem && <meta itemProp='position' content={String(position + 1)} />}
-	</>;
+        <Link
+            href={item.url}
+            className={clsx(
+                'horizontal-menu__element is-link',
+                isRootElem ? 'is-root' : 'is-child',
+                {active: item.isActive}
+            )}>
+
+            {image && <span className='img-link'>{imageElem}</span>}
+            <span className='title' {...(isRootElem ? {itemProp: 'name'} : {})}>
+                {isRootElem ? titleWithIcon : item.title}
+            </span>
+
+        </Link>
+        {isRootElem && <meta itemProp='position' content={String(position + 1)} />}
+    </>;
 
 	return (
 		<div className={clsx(
 			'horizontal-menu__element',
 			isRootElem ? 'is-root' : 'is-child',
-			{active: item.isActive},
-			className
+			{active: item.isActive}
 		)}>
 			{image && imageElem}
 			<span className='horizontal-menu__text-title'>

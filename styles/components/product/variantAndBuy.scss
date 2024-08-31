@@ -101,26 +101,31 @@
 	}
 
 	&__2-cart {
-		align-items: flex-start;
+		// align-items: flex-start;
 
 		display: flex;
 		flex-wrap: wrap;
 		margin: -5px -10px 1rem;
+		// flex-direction: column;
 	}
 
 	&__btns {
 		.btn {
-			margin: 5px 10px;
+			margin: 5px 5px;
+			width: 185px;
 		}
 	}
 
 	&__qty {
 		flex-shrink: 0;
-		margin: 5px 10px;
+		margin: 5px 5px;
 		width: 145px;
 
 		.form-control {
-			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 0px;
 		}
 	}
 

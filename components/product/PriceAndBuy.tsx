@@ -1,27 +1,28 @@
-import {useState, useMemo, ChangeEvent, MouseEvent} from 'react';
-import {IProductItem, IVariant} from 'boundless-api-client';
+import { useState, useMemo, ChangeEvent, MouseEvent } from 'react';
+import { IProductItem, IVariant } from 'boundless-api-client';
 import clsx from 'clsx';
-import {useAppDispatch} from '../../hooks/redux';
-import {addItem2Cart} from '../../redux/actions/cart';
-import {findSellingPrice, getPriceForTpl, IPriceForTpl} from '../../lib/product';
+import { useAppDispatch } from '../../hooks/redux';
+import { addItem2Cart } from '../../redux/actions/cart';
+import { findSellingPrice, getPriceForTpl, IPriceForTpl } from '../../lib/product';
 import currency from 'currency.js';
-import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus';
-import {faMinus} from '@fortawesome/free-solid-svg-icons/faMinus';
-import {faCartPlus} from '@fortawesome/free-solid-svg-icons/faCartPlus';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
+import { faMinus } from '@fortawesome/free-solid-svg-icons/faMinus';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useFormatCurrency from '../../hooks/useFormatCurrency';
+import { useRouter } from 'next/router';
 
-export default function ProductPriceAndBuy({product, selectedVariant, setError, onAddedToCart}: IPriceAndBuyProps) {
+export default function ProductPriceAndBuy({ product, selectedVariant, setError, onAddedToCart }: IPriceAndBuyProps) {
 	const dispatch = useAppDispatch();
 	const [qty, setQty] = useState<number>(1);
-	const {formatCurrency} = useFormatCurrency();
-
-	const {price, benefit, isInStock} = useMemo(() => {
-		let price: IPriceForTpl|undefined, benefit: number | null = null;
+	const { formatCurrency } = useFormatCurrency();
+	const router = useRouter()
+	const { price, benefit, isInStock } = useMemo(() => {
+		let price: IPriceForTpl | undefined, benefit: number | null = null;
 		if (selectedVariant) {
 			const sellingPrice = findSellingPrice(selectedVariant.prices);
 			if (sellingPrice) {
-				price = {price: sellingPrice.value, oldPrice: sellingPrice.old};
+				price = { price: sellingPrice.value, oldPrice: sellingPrice.old };
 			}
 		} else {
 			const sellingPrice = findSellingPrice(product.prices);
@@ -36,17 +37,34 @@ export default function ProductPriceAndBuy({product, selectedVariant, setError, 
 
 		const isInStock = selectedVariant ? selectedVariant.in_stock : product.in_stock;
 
-		return {price, benefit, isInStock};
+		return { price, benefit, isInStock };
 	}, [product, selectedVariant]);
+
+
+	const productRedirectUrl = useMemo(() => {
+		if (product?.external_id) {
+			{
+				return product.external_id
+			}
+		}
+		else {
+			return false
+		}
+	}, [product]);
+
+	console.log(productRedirectUrl, "productRedirectUrl")
 
 	const onBuyBtnClicked = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 
+		if (productRedirectUrl) {
+			window.open(productRedirectUrl, '_blank');
+			return;
+		}
 		if (product.has_variants && !selectedVariant) {
 			setError('Please, choose a variant.');
 			return;
 		}
-
 		const itemId = selectedVariant ? selectedVariant.inventoryItem.item_id : product.item_id;
 		dispatch(addItem2Cart(itemId, qty));
 
@@ -59,7 +77,7 @@ export default function ProductPriceAndBuy({product, selectedVariant, setError, 
 		<div className='price-and-buy'>
 			{price?.price && <p className={'price-and-buy__price'}>
 				{price.isFrom && <span className={'price-and-buy__from'}>From:</span>}
-				<span className={clsx('price-and-buy__current', {'has-old': price.oldPrice})}>
+				<span className={clsx('price-and-buy__current', { 'has-old': price.oldPrice })}>
 					{formatCurrency(price.price)}
 				</span>
 				{price.oldPrice && <span className={'price-and-buy__old'}>{formatCurrency(price.oldPrice)}</span>}
@@ -69,7 +87,7 @@ export default function ProductPriceAndBuy({product, selectedVariant, setError, 
 				<span className={'price-and-buy__benefit-value'}>{formatCurrency(benefit)}</span>
 			</p>}
 			{(!product.has_variants || selectedVariant) && <>
-				<p className={clsx('price-and-buy__stock', {'in': isInStock, 'out': !isInStock})}>
+				<p className={clsx('price-and-buy__stock', { 'in': isInStock, 'out': !isInStock })}>
 					{isInStock && 'In stock'}
 					{!isInStock && 'Out of stock'}
 				</p>
@@ -86,7 +104,7 @@ export default function ProductPriceAndBuy({product, selectedVariant, setError, 
 						className={'btn btn-action btn-anim btn-lg'}
 						onClick={onBuyBtnClicked}
 					>
-						<FontAwesomeIcon icon={faCartPlus} /> Buy
+						<FontAwesomeIcon icon={faCartPlus} /> Buy Now
 					</button>
 				</div>
 			</div>}
@@ -95,13 +113,13 @@ export default function ProductPriceAndBuy({product, selectedVariant, setError, 
 }
 
 interface IPriceAndBuyProps {
-	product: Pick<IProductItem, 'prices' | 'has_variants' | 'in_stock' | 'item_id' | 'sku'>;
+	product: Pick<IProductItem, 'prices' | 'has_variants' | 'in_stock' | 'item_id' | 'sku' | 'external_id'>
 	selectedVariant?: IVariant | null;
 	setError: (error: null | string) => void;
 	onAddedToCart?: (itemId: number, qty: number) => void;
 }
 
-const PriceAndBuyQty = ({qty, setQty}: {qty: number, setQty: (value: number) => void}) => {
+const PriceAndBuyQty = ({ qty, setQty }: { qty: number, setQty: (value: number) => void }) => {
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => setQty(parseInt(e.target.value) || 1);
 	const onBtnClicked = (diff: number, e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -122,12 +140,14 @@ const PriceAndBuyQty = ({qty, setQty}: {qty: number, setQty: (value: number) => 
 			>
 				<FontAwesomeIcon icon={faMinus} />
 			</button>
-			<input type={'number'}
+			{/* <input type={'number'}
 				className={'form-control'}
+				style={{ display: 'none' }}
 				value={qty}
 				min={1}
 				onChange={onChange}
-			/>
+			/> */}
+			<span className={'form-control'}>{qty}</span>
 			<button type={'button'}
 				className={'btn btn-outline-secondary text-center'}
 				onClick={onBtnClicked.bind(null, 1)}

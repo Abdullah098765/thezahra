@@ -1,106 +1,77 @@
-$vertical-menu-big-padding: 15px;
-$horizontal-menu-big-padding: 20px;
+$horizontal-menu-big-padding: 15px;
 $horizontal-menu-small-padding: 10px;
 $horizontal-menu-border: 1px solid #eee;
-$horizontal-menu-active-border-color: #eee;
 
 .horizontal-menu {
 	$root: &;
 	background-color: $front-h-menu-bg;
-
-	@include media-breakpoint-down(md) {
-		display: none;
-	}
+	border-bottom: $horizontal-menu-border;
+	border-top: $horizontal-menu-border;
 
 	&__list {
 		display: flex;
 		flex-wrap: wrap;
-		//justify-content: space-around;
-		justify-content: flex-start;
+		justify-content: space-around;
 		margin-bottom: 0;
 	}
 
 	&__root-element {
-		border-right: 1px solid $front-h-menu-border;
+		padding: $horizontal-menu-big-padding;
 		position: relative;
-
-		&:first-child {
-			border-left: 1px solid $front-h-menu-border;
-
-			&.active {
-				border-left-color: $horizontal-menu-active-border-color;
-			}
-		}
-
-		&:hover {
-			background-color: $front-h-menu-child-bg;
-			border-right-color: $horizontal-menu-active-border-color;
-
-			.is-link {
-				color: $front-h-menu-color;
-			}
-		}
-
-		&.active {
-			background-color: $front-h-menu-child-bg;
-			border-right-color: $horizontal-menu-active-border-color;
-			color: $front-h-menu-color;
-
-			&.open {
-				color: $theme-contrast-color;
-			}
-		}
 	}
 
 	&__element {
 		align-items: center;
 		display: flex;
-		padding: $vertical-menu-big-padding $horizontal-menu-big-padding;
 
 		&.is-link {
-			color: $theme-contrast-color;
+			color: $front-h-menu-color;
 			text-decoration: none;
 
-			&.active {
-				color: $front-h-menu-color;
+			&:hover {
+				text-decoration: underline;
 			}
 		}
 
 		&.is-child {
-			color: $front-h-menu-color;
-			padding: 15px 14px 15px 25px;
-			// white-space: nowrap;
-			transition: all ease-in-out 0.5s;
+			padding: $horizontal-menu-small-padding $horizontal-menu-big-padding;
+			white-space: nowrap;
 
 			&.is-link:hover {
 				background-color: darken($front-h-menu-child-bg, 5%);
-				// text-decoration: underline;
+				color: $front-h-menu-active;
+				text-decoration: none;
 			}
 		}
 
 		&.is-root {
-			font-size: 1rem;
+			font-size: 15px;
 			font-weight: $front-h-menu-link-weight;
+			text-transform: uppercase;
 
 			.title {
 				line-height: 24px;
 			}
+
+			&.is-link:hover:not(.active) {
+				color: $front-h-menu-color;
+			}
 		}
 
 		&.active {
-			color: $theme-color;
-		}
+			color: $front-h-menu-active;
 
-		.title {
-			word-break: break-all;
+			&:hover {
+				color: $front-h-menu-active;
+			}
 		}
 	}
 
 	&__child-list {
 		background-color: $front-h-menu-child-bg;
-		left: 0;
+		margin-top: 15px;
 		position: absolute;
-		width: 260px;
+		width: 220px;
 		z-index: 10;
 
 		&.animate__animated.animate__fadeInUp,
@@ -116,9 +87,5 @@ $horizontal-menu-active-border-color: #eee;
 		&:last-child {
 			border-bottom-width: 1px;
 		}
-	}
-
-	&__text-title {
-		word-break: break-all;
 	}
 }

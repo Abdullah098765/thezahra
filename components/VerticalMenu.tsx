@@ -50,32 +50,28 @@ function ListElement({item, position}: {item: IMenuItem, position?: number}) {
 
 	return <>
 		{image && <>
-				{item.url && !item.isActive ?
-						<Link
-								href={item.url}
-								className={clsx('vertical-menu__link img-link', isRootElem ? 'is-root' : 'is-child')}>
-
-								{imageElem}
-
-						</Link>
-						: imageElem}
+			{item.url && !item.isActive ?
+				<Link
+						href={item.url}
+						className={clsx('vertical-menu__link img-link', isRootElem ? 'is-root' : 'is-child')}>
+						{imageElem}
+				</Link>
+				: imageElem}
 		</>}
-		{item.url && !item.isActive
-				? <>
-						<Link
-								href={item.url}
-								className={clsx('vertical-menu__link title', isRootElem ? 'is-root' : 'is-child')}
-								itemProp='url'>
-
-								{isRootElem
-										? <span itemProp='name'>{item.title}</span>
-										: item.title}
-
-						</Link>
-						{isRootElem && <meta itemProp='position' content={String(position + 1)} />}
-				</>
-				: <span className={clsx('vertical-menu__text-title', isRootElem ? 'is-root' : 'is-child')}>
-						{item.title}
-				</span>}
+			{item.url && !item.isActive
+					? <>
+							<Link
+									href={item.url}
+									className={clsx('vertical-menu__link title', isRootElem ? 'is-root' : 'is-child')}
+									itemProp='url'>
+									{isRootElem
+											? <span itemProp='name'>{item.title}</span>
+											: item.title}
+							</Link>
+							{isRootElem && <meta itemProp='position' content={String(position + 1)} />}
+					</>
+					: <span className={clsx('vertical-menu__text-title', isRootElem ? 'is-root' : 'is-child')}>
+							{item.title}
+					</span>}
     </>;
 }

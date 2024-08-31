@@ -10,15 +10,15 @@ export default function SwiperSliderSlide({img, link, caption, captionPosition, 
 			{useFilling && <div className='swiper-slider__shadow' style={{backgroundColor: fillingColor, opacity: fillingOpacity}} />}
 			{link
 				? <Link
-					href={link}
-					className={clsx('swiper-slider__content', captionPosition && `swiper-slider__content_${captionPosition}`)}
-					{...linkProps}>
-					{caption && <div className='swiper-slider__caption' dangerouslySetInnerHTML={{__html: caption}}></div>}
-				</Link>
+            href={link}
+            className={clsx('swiper-slider__content', captionPosition && `swiper-slider__content_${captionPosition}`)}
+            {...linkProps}>
+            {caption && <div className='swiper-slider__caption' dangerouslySetInnerHTML={{__html: caption}}></div>}
+        </Link>
 				: <div className={clsx('swiper-slider__content', captionPosition && `swiper-slider__content_${captionPosition}`)}>
-						{caption && <div className='swiper-slider__caption' dangerouslySetInnerHTML={{__html: caption}}></div>}
-				</div>}
-	</>;
+					{caption && <div className='swiper-slider__caption' dangerouslySetInnerHTML={{__html: caption}}></div>}
+			</div>}
+    </>;
 }
 
 export interface ISwiperSliderSlide {

@@ -1,11 +1,11 @@
-import {useState} from 'react';
-import {IProductItem, IVariant} from 'boundless-api-client';
+import { useState } from 'react';
+import { IProductItem, IVariant } from 'boundless-api-client';
 import ProductVariantPicker from './VariantPicker';
 import ProductPriceAndBuy from './PriceAndBuy';
 import clsx from 'clsx';
-import {CSSTransition} from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
-export default function ProductVariantAndBuy({product, onAddedToCart}: IProductVariantAndBuyProps) {
+export default function ProductVariantAndBuy({ product, onAddedToCart }: IProductVariantAndBuyProps) {
 	const [selectedVariant, setSelectedVariant] = useState<null | IVariant>();
 	const [error, setError] = useState<null | string>(null);
 	const [showAnimation, setShowAnimation] = useState(false);
@@ -23,7 +23,7 @@ export default function ProductVariantAndBuy({product, onAddedToCart}: IProductV
 	return (
 		<div className={'variant-and-buy'}>
 			{product.has_variants &&
-				<div className={clsx('variant-and-buy__variants', {'has-error': error})}>
+				<div className={clsx('variant-and-buy__variants', { 'has-error': error })}>
 					<CSSTransition
 						in={showAnimation}
 						timeout={1000}
@@ -51,6 +51,6 @@ export default function ProductVariantAndBuy({product, onAddedToCart}: IProductV
 }
 
 interface IProductVariantAndBuyProps {
-	product: Pick<IProductItem, 'prices' | 'has_variants' | 'in_stock' | 'item_id' | 'extendedVariants' | 'sku'>,
+	product: Pick<IProductItem, 'prices' | 'has_variants' | 'in_stock' | 'item_id' | 'extendedVariants' | 'external_id' | 'sku'>,
 	onAddedToCart?: (itemId: number, qty: number) => void;
 }
