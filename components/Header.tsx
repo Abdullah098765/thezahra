@@ -2,7 +2,7 @@ import {MouseEvent} from 'react';
 import Link from 'next/link';
 import HeaderCart from './cart/HeaderCart';
 import ChooseVariantModal from './header/ChooseVariantModal';
-import logoImg from '../assets/logo.png';
+import logoImg from '../assets/logo.svg';
 import {faBars} from '@fortawesome/free-solid-svg-icons/faBars';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {useAppDispatch} from '../hooks/redux';
